@@ -1,8 +1,17 @@
-import sys
+linea = 0
 
-read = iter(sys.stdin.read().split())
-n = int(next(read))
-numeros = [int(next(read)) for i in range(n)]
-mn = min(numeros)
-my = max(numeros)
-print(mn, my)
+while True: 
+    try:
+        m = input()
+
+        if linea % 2 == 0: 
+            print(m[::-1])
+        else:   
+            print(m)
+        linea += 1
+
+    except EOFError:
+        break
+
+
+
