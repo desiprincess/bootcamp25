@@ -8,7 +8,7 @@ def solve(texto):
         else:
             res += " " + texto[i] + " *"
     borde = bordes(len(res))
-    return f"{borde}\n{res}\n{borde}" # f" lo convierte en una cadena de caracteres. 
+    return f"{borde}\n{res}\n{borde}"
 
 def bordes(m): 
     res = ""
