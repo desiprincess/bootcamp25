@@ -22,6 +22,5 @@ if mermelada == 0: #está alineado con las líneas.
 
 elif tostada1 == tostada2: 
     print("HA HABIDO SUERTE")
-
 else: 
     print("TRAGEDIA")
