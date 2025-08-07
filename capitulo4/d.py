@@ -21,7 +21,7 @@ salida = []
 for i in range(n): 
     ans = []
     for j in range(m): 
-        if filas[i] or col[j]: 
+        if filas[i] or col[j]: #AND Y OR SOLO ACEPTAN VALORES BOOLEANOS (VERDADERO O FALSO)
             ans.append("#")
         else: 
             ans.append(".")
