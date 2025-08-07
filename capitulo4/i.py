@@ -4,23 +4,14 @@ read = iter(sys.stdin.read().split())
 n = int(next(read))
 m = int(next(read))
 
-sandias = []
-
-maxim = -1
+lienzo = []
 for i in range(n):
-    s = 0
-    fila = []
-    for j in range(m):
-        c = int(next(read))
-        fila.append(c)
-        s += c
-    maxim = max(maxim,s)
-    sandias.append(fila)
+    lienzo.append(next(read))
 
-for i in range(m):
-    s = 0
-    for j in range(n):
-        s += sandias[j][i]
-    maxim = max(maxim,s)
-print(maxim)
+for i in range(n-1): 
+    for j in range(m-1):  #porque sino se pasa del rango (out of bounds)
+        if lienzo[i][j] == lienzo[i][j+1] == lienzo[i+1][j] == lienzo[i+1][j+1]: 
+            print("NO ORIGINAL")
+                exit()  #si ya se cumple se deja de ejecutar el programa entero.
+                    print("ORIGINAL") #está colocado aquí porque es cuando ya ha terminado de leer TODO, no solo una sola linea.
 
