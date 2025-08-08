@@ -4,9 +4,7 @@ read = iter(sys.stdin.read().split())
 n = int(next(read))
 m = int(next(read))
 
-tablero = []
-for i in range(n): 
-    tablero.append(next(read))
+tablero = [next(read) for _ in range(n)]
 
 tablero2 = [[""for _ in range(m)] for _ in range(n)]
 
@@ -21,7 +19,7 @@ for i in range(n):
             minas = 0
             for k in range(8): 
                 pi, pj = i + dy[k], j + dx[k]
-                if 0 <= pi < m and 0 <= pj < n: 
+                if 0 <= pi < n and 0 <= pj < m: 
                     if tablero[pi][pj] == "*": 
                         minas += 1
             if minas > 0: 
