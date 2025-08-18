@@ -1,51 +1,46 @@
 import sys
-from collections import deque 
 
-def BFS(sr,sc):
-    q = deque([(sr, sc, 0)])
-    visitado[sr][sc] = True 
+def row(fila, j, minimo):
+    if j == len(fila): 
+        return minimo
 
-    dirs = ((0, 1), (-1, 0), (1, 0), (0, -1))
+    if fila[j] < fila[minimo]: 
+        minimo = j #voy actualizando el minimo numero de la fila
+    return row(fila, j+1, minimo)
 
-    while q: 
-        r, c, saltos = q.popleft()
-        if r == tr and c == tc:
-            return saltos 
+def col(matriz, i, j, min_row):
+    if i == len(matriz):
+        return True 
+    if matriz[i][j] > min_row: #si algun numero de la columna es mayor al que hemos declarado coo el minimo deja de cumplir lo que pide el problema.
+        return False
+    return col(matriz, i+1, j, min_row)
 
-        for row, col in dirs: 
-            nrow, ncol = r + row, c + col
-            
-            if not (0 <= nrow < n and 0 <= ncol < n): 
-                continue 
-            
-            if visitado[nrow][ncol]: 
-                continue
+def saddle(matriz, i): #la funcion que me va a devolver las coordenadas.
+    if i == len(matriz): 
+        return -1, -1       #caso base 
+    j = row(matriz[i], 1, 0)
+    min_row = matriz[i][j] #asumimos que el min row va a er el max col. 
+    if col(matriz, 0, j, min_row): 
+        return i, j #para que me devuelva unicamente las coordenadas.
+    return saddle(matriz, i+1) #i+1 para que vaya leyendo todas las filas.
 
-            celda = lago[nrow][ncol] 
-            if celda == ".": 
-                continue 
-
-            visitado[nrow][ncol] = True 
-            q.append((nrow, ncol, saltos+1))
-
-    return -1
+def solve(): 
+    n = int(next(read)); m = int(next(read))
+    matriz = []
+    for j in range(n):
+        linea = []
+        for k in range(m): 
+            linea.append(int(next(read)))
+        matriz.append(linea)               #matriz construida. 
+    return saddle(matriz, 0)
 
 read = iter(sys.stdin.read().split())
-n = int(next(read))
+t = int(next(read))
 
-lago = []
-for _ in range(n): 
-    lago.append(list(next(read)))
+salida = []
+for i in range(t): 
+    x, y = solve()
+    salida.append(f"{x} {y}")
+print("\n".join(salida))
 
-sr = sc = tr = tc = -1 
-
-for i in range(n):
-    for j in range(n): 
-        if lago[i][j] == "R": 
-            sr, sc = i, j
-        if lago[i][j] == "C":
-            tr, tc = i, j
-
-visitado = [[False] * n for _ in range(n)]
-print(BFS(sr, sc))
-
+            
