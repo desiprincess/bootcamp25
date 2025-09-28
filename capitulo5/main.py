@@ -32,6 +32,9 @@ def selectionSort(a):
                 min = j 
         a[i], a[min] = a[min], a[i]
 
+def mergeSort(a): 
+
+
 
 read = iter(sys.stdin.read().split())
 n = int(next(read))
